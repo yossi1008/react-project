@@ -1,24 +1,38 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import Header from './component/Header';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+} from "react-router-dom";
+import Home from './page/Home'
+import About from './page/About'
+import Contact from './page/Contact'
+import User from './page/User'
+
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+        <Router >
+        <Header />
+          <Switch>
+            <Route exact path="/">
+              <Home/>
+            </Route>
+            <Route  path="/user/:id" children={<User/>} />
+              
+            <Route path="/about">
+              <About/>
+            </Route>
+            <Route path="/contact">
+              <Contact/>
+            </Route>
+            <Route path="*">
+              <p>404見つかりませんでした。</p>
+            </Route>
+          </Switch>
+        </Router>
     </div>
   );
 }
